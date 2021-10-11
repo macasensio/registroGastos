@@ -1,0 +1,32 @@
+    [
+        {
+            "categoria": "supermercado",
+            "nombre": "Supermercado",
+            "icono": "./images/icon-supermercado.png"
+        },
+        {
+            "categoria": "verduleria",
+            "nombre": "Verdulería",
+            "icono": "./images/icon-verduleria.png"
+        },
+        {
+            "categoria": "gastosF",
+            "nombre": "Gastos Fijos",
+            "icono": "./images/icon-casa.png"
+        },
+        {
+            "categoria": "social",
+            "nombre": "Social",
+            "icono": "./images/icon-social.png"
+        },
+        {
+            "categoria": "ahorros",
+            "nombre": "Ahorros",
+            "icono": "./images/icon-ahorro.png"
+        },
+        {
+            "categoria": "transporte",
+            "nombre": "Transporte",
+            "icono": "./images/icon-transporte.png"
+        }
+    ]

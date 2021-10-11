@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asensio - Entrega final</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-------------------------------------- NAV --------------------------------------> 
+    <nav id="navBloque">
+        <div>
+            <img src="/images/icon-billetera.png"width="60">
+            <p id="nombreApp">MI REGISTRO DE GASTOS</p>
+            <p id="nombreUser">¡Hola!</p>
+            <p id="btnCerrarSesion" style="display: none;" onclick="egreso()">Cerrar sesión</p>
+        </div>
+    </nav>
+    <!-------------------------------------- END NAV -------------------------------------->    
+        
+    <div id="bienvenida">
+        <div>
+            <p>¡Bienvenida/o!</p>
+            <p>¿Quién sos?</p>
+            <input type="text" name="nombreUsuario" id="nombreUsuario" placeholder="Nombre">            
+            <p id="msjErrorUser" class="msjError" style="visibility: hidden;">Tu nombre debe tener al menos 2 letras</p>
+            <button id="btnIngresar" onclick="ingreso()">INGRESAR</button>
+        </div>
+    </div>
+
+    <!-------------------------------------- MAIN -------------------------------------->
+    <main id="mainBloque">
+        
+        <!------------------- DIV CATEGORIAS ------------------->
+        <div id="CategoriasDiv">       
+            <h2 id="categoriash2">Categorías</h2>
+            <div id="cajaCategorias">
+                <!-- categorías creadas desde el json-->
+            </div>
+        </div> 
+
+
+        <!------------------- VENTANA MODAL -------------------> 
+        <div id="divGastoModal">        
+            <div id="gastoModal" style="display: none;">                
+                <div>    
+                    <label for="click" id="btnCerrar" onclick="cerrarModal()"><i class="fas fa-times"></i></label>    
+                    <!--<button id="btnCerrar" onclick="cerrarModal()"><i class="fas fa-times"></i></button>-->
+                </div>
+                <div id="inputMonto">
+                    <label for="monto">Monto: $</label>
+                    <input id="monto" type="text" placeholder="0.00" onkeypress="validarNumeros(event)">
+                    <p id="msjErrorGasto" class="msjError" style="visibility: hidden;">El monto debe ser mayor a 0.00</p>
+                </div>
+                <div class="divModalMargin">    
+                    <label for="metodoDePago">Método de Pago:</label>
+                    <select name="metodoDePago" id="metodoDePago">
+                        <option value="efectivo" >Efectivo</option>
+                        <option value="tarjetaDebito">Tarjeta de Débito</option>
+                        <option value="tarjetaCredito">Tarjeta de Crédito</option>
+                    </select>
+                </div>
+                <div class="divModalMargin">
+                    <label for="notas">Notas:</label>
+                    <input id="notas" type="text" placeholder="...">
+                </div>
+                <div class="divModalMargin">   
+                    <button id="btnGuardar">Guardar gasto</button>             
+                </div>                
+            </div>
+        </div>
+        <!------------------- END VENTANA MODAL -------------------> 
+
+        <!------------------- END DIV CATEGORIAS ------------------->
+
+        <!------------------- DIV TRANSACCIONES ------------------->
+        <div id="misGastos">
+            <div id="cajaTransacciones">
+                <h2 id="transacciones">Transacciones</h2>
+                <h4 id="gastoTotal">Total: $</h4>
+                <p id="mostrarTransacciones" onclick="mostrarTransacciones()">Ver gastos<i class="fas fa-chevron-up"></i></p>
+            </div>
+
+            <div id="cajaCates" style="display: none;">
+                <label for="buscar" id="buscar">
+                    Buscar gasto: <i class="fas fa-search" onclick="mostrarBuscador()"></i>
+                    <input type="text" name="busqueda" id="myInput" onclick="filtrarBusqueda()" style="display: none;">                    
+                </label>
+                <div id='divsupermercado'>
+                    <h2>Supermercado</h2>
+                    <p>Todavía no ha registrado gastos en esta categoría.</p>
+                    <ul></ul>
+                </div>
+                
+                <div id='divverduleria'>
+                    <h2>Verdulería</h2>
+                    <p>Todavía no ha registrado gastos en esta categoría.</p>
+                    <ul></ul>
+                </div>
+                
+                <div id='divgastosF'>
+                    <h2>Gastos Fijos</h2>
+                    <p>Todavía no ha registrado gastos en esta categoría.</p>
+                    <ul></ul>
+                </div>
+                
+                <div id='divsocial'>
+                    <h2>Social</h2>
+                    <p>Todavía no ha registrado gastos en esta categoría.</p>
+                    <ul></ul>
+                </div>
+                
+                <div id='divahorros'>
+                    <h2>Ahorros</h2>
+                    <p>Todavía no ha registrado gastos en esta categoría.</p>
+                    <ul></ul>
+                </div>
+                
+                <div id='divtransporte'>
+                    <h2>Transporte</h2>
+                    <p>Todavía no ha registrado gastos en esta categoría.</p>
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+        <!------------------- END DIV TRANSACCIONES -------------------> 
+    </main>
+    <!-------------------------------------- END MAIN -------------------------------------->
+
+    <!-------------------------------------- FOOTER -------------------------------------->    
+    <footer>
+        <p>Alumna: Macarena Asensio</p>
+        <p>Tutor: Patricio Pallua</p>
+        <p>Profesor: Harold Reyes</p>
+        <p>Proyecto: Wep app de registro de gastos</p>
+        <p>Coderhouse - Javascript</p>
+        <p>&copy;2021</p>
+    </footer>
+    <!-------------------------------------- END FOOTER -------------------------------------->
+    
+    <!-------------------------------------- SCRIPTS -------------------------------------->
+    <script src="js/custom/ingresoEgreso.js"></script>
+    <script src="js/custom/modal.js"></script>
+    <script src="js/custom/categoria.js"></script>
+    <script src="js/custom/eventos.js"></script>
+    <script src="js/custom/app.js"></script>
+    <script src="js/custom/functions.js"></script>
+    <script src="js/custom/localStorage.js"></script>    
+    <script src="js/custom/acumuladores.js"></script>
+    <script src="js/Class/Gasto.js"></script>
+    <!-------------------------------------- END SCRIPTS -------------------------------------->
+
+</body>
+</html>
